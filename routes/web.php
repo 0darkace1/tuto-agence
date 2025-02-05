@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminOptionController;
 use App\Http\Controllers\Admin\AdminPropertyController;
 use App\Http\Controllers\Admin\PictureController;
-use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,16 +24,17 @@ use App\Http\Controllers\ImageController;
 
 Route::get('/', [HomeController::class, "home"])->name('index');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get("/login", [AuthController::class, "login"])->name('login');
-Route::post("/login", [AuthController::class, "signIn"]);
-Route::get("/register", [AuthController::class, "register"])->name('register');
-Route::post("/register", [AuthController::class, "signUp"]);
-Route::delete('/logout', [AuthController::class, "logout"])->middleware("auth")->name("logout");
-
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 Route::get('/images/{path}', [ImageController::class, "show"])->where('path', '.*');
-
 
 Route::prefix("/properties")->name("properties.")->controller(PropertyController::class)->group(function () {
     $idRegex = "[0-9]+";
@@ -74,3 +76,5 @@ Route::prefix("/admin")->name('admin.')->middleware(["auth", "admin"])->group(fu
         "picture" => $idRegex,
     ]);
 });
+
+require __DIR__ . '/auth.php';

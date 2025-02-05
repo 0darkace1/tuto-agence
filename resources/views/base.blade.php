@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Agence Immo - @yield('title')</title>
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.4.2/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
     <style>
@@ -84,7 +85,6 @@
 
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                @method('delete')
                                 <button class="btn btn-outline-tertiary">Se déconnecter</button>
                             </form>
                         </div>
@@ -96,23 +96,23 @@
 
     <div class="container">
         @if (session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <x-alert type='danger'>
                 {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            </x-alert>
         @endif
 
         @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+            <x-alert type='success'>{{ session('success') }}</x-alert>
         @endif
+
         @if ($errors->any())
-            <div class="alert alert-danger">
+            <x-alert type='danger'>
                 <ul class="my-0">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            </div>
+            </x-alert>
         @endif
 
         @yield('content')

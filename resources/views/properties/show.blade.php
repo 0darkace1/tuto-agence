@@ -55,49 +55,19 @@
             <form action="{{ route('properties.contact', $property) }}" method="POST" class="vstack gap-2">
                 @csrf
                 <div class="row">
-                    @include('shared.input', [
-                        'name' => 'lastname',
-                        'label' => 'Nom',
-                        'type' => 'text',
-                        'value' => 'DOE',
-                        'disabled' => $property->sold,
-                        'class' => 'col',
-                    ])
-                    @include('shared.input', [
-                        'name' => 'firstname',
-                        'label' => 'Prénom',
-                        'type' => 'text',
-                        'value' => 'John',
-                        'disabled' => $property->sold,
-                        'class' => 'col',
-                    ])
+                    <x-input name="lastname" label="Nom" type="text" value="DOE" :disabled="$property->sold"
+                        class="col"></x-input>
+                    <x-input name="firstname" label="Prénom" type="text" value="John" :disabled="$property->sold"
+                        class="col"></x-input>
                 </div>
                 <div class="row">
-                    @include('shared.input', [
-                        'name' => 'phone',
-                        'label' => 'Téléphone',
-                        'type' => 'number',
-                        'value' => '0612345678',
-                        'disabled' => $property->sold,
-                        'class' => 'col',
-                    ])
-                    @include('shared.input', [
-                        'name' => 'email',
-                        'label' => 'Email',
-                        'type' => 'email',
-                        'value' => 'email@example.com',
-                        'disabled' => $property->sold,
-                        'class' => 'col',
-                    ])
+                    <x-input name="phone" label="Téléphone" type="number" value="0612345678" :disabled="$property->sold"
+                        class="col"></x-input>
+                    <x-input name="email" label="Email" type="email" value="email@example.com" :disabled="$property->sold"
+                        class="col"></x-input>
                 </div>
-                @include('shared.input', [
-                    'name' => 'message',
-                    'label' => 'Message',
-                    'type' => 'textarea',
-                    'value' => 'Bonjour, ce bien m’intéresse',
-                    'disabled' => $property->sold,
-                    'class' => 'col',
-                ])
+                <x-input name="message" label="Message" type="textarea" value="Bonjour, ce bien m’intéresse"
+                    :disabled="$property->sold" class="col"></x-input>
 
                 <div class="row g-2 align-items-center">
                     <button class="btn btn-dark" @disabled($property->sold) type="submit">Envoyer le message</button>

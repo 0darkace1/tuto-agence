@@ -1,49 +1,52 @@
-@extends('base')
+<x-guest-layout>
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
 
-@section('title', 'Login')
+        <!-- Name -->
+        <div>
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+                autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
 
-@section('content')
-    <div class="h-100 d-flex flex-column align-items-center justify-content-center">
+        <!-- Email Address -->
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
 
-        <h1 class="mb-4">Agence Immo</h1>
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
 
-        <form action="{{ route('register') }}" method="POST" class="p-4 w-50">
-            @csrf
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                autocomplete="new-password" />
 
-            <div class="mb-3">
-                @include('shared.input', [
-                    'name' => 'name',
-                    'label' => 'Nom',
-                    'type' => 'text',
-                ])
-            </div>
-            <div class="mb-3">
-                @include('shared.input', [
-                    'name' => 'email',
-                    'label' => 'Email',
-                    'type' => 'email',
-                ])
-            </div>
-            <div class="mb-3">
-                @include('shared.input', [
-                    'name' => 'password',
-                    'label' => 'Mot de passe',
-                    'type' => 'password',
-                ])
-            </div>
-            <div class="mb-3">
-                @include('shared.input', [
-                    'name' => 'password_confirm',
-                    'label' => 'Confirmation mot de passe',
-                    'type' => 'password',
-                ])
-            </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
 
-            <div class="d-flex flex-column justify-content-center text-center">
-                <button type="submit" class="btn btn-dark mb-4">S'inscrire</button>
-                <a href="{{ route('login') }}">
-                    Déjà un inscrit ? Se connecter
-                </a>
-            </div>
-    </div>
-@endsection
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+
+            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                name="password_confirmation" required autocomplete="new-password" />
+
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                href="{{ route('login') }}">
+                {{ __('Already registered?') }}
+            </a>
+
+            <x-primary-button class="ms-4">
+                {{ __('Register') }}
+            </x-primary-button>
+        </div>
+    </form>
+</x-guest-layout>

@@ -181,3 +181,11 @@ Vider BDD et Seed
 ```
 php artisan migrate:fresh --seed
 ```
+
+Créer un composant avec Class
+
+php artisan make:component Alert
+
+Créer un composant sans Class
+
+php artisan make:component Input --view
