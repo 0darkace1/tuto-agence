@@ -92,6 +92,18 @@ php artisan ide-helper:models -M
 php artisan ide-helper:meta
 ```
 
+Installer Laravel Breeze pour l'Auth
+
+```
+composer require laravel/breeze --dev
+```
+
+Configurer Breeze dans le projet en utilisant des vue Blade
+
+```
+php artisan breeze:install blade
+```
+
 ## Utilisation
 
 Créer une MIGRATION:
@@ -184,8 +196,12 @@ php artisan migrate:fresh --seed
 
 Créer un composant avec Class
 
+```
 php artisan make:component Alert
+```
 
 Créer un composant sans Class
 
+```
 php artisan make:component Input --view
+```

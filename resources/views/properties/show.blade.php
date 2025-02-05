@@ -17,11 +17,16 @@
                 class="img-thumbnail w-100"> --}}
             <div id="carouselExample" class="carousel slide w-100">
                 <div class="carousel-inner rounded">
-                    @foreach ($property->pictures as $k => $picture)
+                    @forelse ($property->pictures as $k => $picture)
                         <div class="carousel-item @if ($k === 0) active @endif">
                             <img src="{{ $picture->getImageUrl(800, 530) }}" class="d-block w-100">
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="carousel-item active">
+                            <img src="https://i0.wp.com/citygem.app/wp-content/uploads/2024/08/placeholder-8.png?ssl=1"
+                                class="d-block w-100">
+                        </div>
+                    @endforelse
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
