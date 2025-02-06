@@ -100,9 +100,9 @@ class AdminPropertyController extends Controller
     /**
      * Restore the specified resource from soft delete.
      */
-    public function restore(int $propertyId)
+    public function restore(Property $property)
     {
-        Property::onlyTrashed()->find($propertyId)->restore();
+        $property->restore();
 
         return to_route("admin.properties.index")->with("success", "Le bien a bien été restauré");
     }

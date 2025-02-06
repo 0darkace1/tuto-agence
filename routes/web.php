@@ -60,11 +60,10 @@ Route::prefix("/admin")->name('admin.')->middleware(["auth", "admin"])->group(fu
     })->name("index");
 
     // --- BIENS ---
-    Route::put("/properties/{propertyId}/restore", [AdminPropertyController::class, 'restore'])->name('properties.restore')->where([
-        'propertyId' => $idRegex,
-    ]);
+    Route::put("/properties/{property}/restore", [AdminPropertyController::class, 'restore'])->name('properties.restore')->where([
+        'property' => $idRegex,
+    ])->withTrashed();
     Route::resource("properties", AdminPropertyController::class)->except(['show']);
-
 
     // --- OPTIONS ---
     Route::resource("options", AdminOptionController::class)->except(['show']);
