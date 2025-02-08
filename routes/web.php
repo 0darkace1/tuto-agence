@@ -73,7 +73,7 @@ Route::prefix("/admin")->name('admin.')->middleware(["auth", "admin"])->group(fu
 
     Route::delete('picture/{picture}', [PictureController::class, 'destroy'])->name('picture.destroy')->where([
         "picture" => $idRegex,
-    ]);
+    ])->can('delete,picture');
 });
 
 require __DIR__ . '/auth.php';

@@ -205,3 +205,9 @@ Créer un composant sans Class
 ```
 php artisan make:component Input --view
 ```
+
+Créer une politique lié a un modèle
+
+```
+php artisan make:policy PropertyPolicy --model=Property
+```
