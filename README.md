@@ -211,3 +211,17 @@ Créer une politique lié a un modèle
 ```
 php artisan make:policy PropertyPolicy --model=Property
 ```
+
+Créer un événement
+
+```
+php artisan make:event ContactRequestEvent
+```
+
+Créer un listener pour un événement:
+(Qu'il faudra mapper dans EventServiceProvider)
+Il faut activer les Queue sur le serveur pour utiliser la partie async
+
+```
+php artisan make:listener ContactListener --event=ContactRequestEvent
+```

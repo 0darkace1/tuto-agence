@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailer;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ContactListener
+class ContactListener implements ShouldQueue
 {
     /**
      * Create the event listener.
