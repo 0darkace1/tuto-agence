@@ -65,6 +65,18 @@
                                 Gestion des utilisateurs
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active position-relative" aria-current="page"
+                                href="{{ route('admin.notifications.index') }}">
+                                Notifications
+                                @if (count(Auth::user()->unreadNotifications))
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                        <span class="visually-hidden">Nouvelles notifications</span>
+                                    </span>
+                                @endif
+                            </a>
+                        </li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ route('properties.index') }}">

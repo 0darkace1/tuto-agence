@@ -9,6 +9,8 @@ use App\Mail\PropertyContactMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\PropertyContactRequest;
 use App\Http\Requests\SearchPropertiesRequest;
+use App\Models\User;
+use App\Notifications\ContactRequestNotification;
 
 class PropertyController extends Controller
 {
@@ -57,9 +59,16 @@ class PropertyController extends Controller
 
     public function contact(PropertyContactRequest $request, Property $property)
     {
-        event(new ContactRequestEvent($property, $request->validated()));
-
+        // 1) Envoi direct
         // Mail::send(new PropertyContactMail($property, $request->validated()));
+
+        // 2) Envoi en utilisant les événements
+        // event(new ContactRequestEvent($property, $request->validated()));
+
+        // 3) Envoi en utilisant les notifications
+        /** @var User $user */
+        $user = User::first();
+        $user->notify(new ContactRequestNotification($property, $request->validated()));
 
         return back()->with('success', "Votre demande de contact a bien été envoyé");
     }

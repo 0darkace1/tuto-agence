@@ -8,6 +8,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminOptionController;
 use App\Http\Controllers\Admin\AdminPropertyController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PictureController;
 
 /*
@@ -53,10 +54,20 @@ Route::prefix("/properties")->name("properties.")->controller(PropertyController
 
 Route::prefix("/admin")->name('admin.')->middleware(["auth", "admin"])->group(function () {
     $idRegex = "[0-9]+";
+    $uuidRegex = "[0-9a-z\-]+";
 
     Route::get("/", function () {
         return view("admin.index");
     })->name("index");
+
+    // --- NOTIFICATIONS ---
+    Route::get('/notifications', [NotificationController::class, 'index'])->name("notifications.index");
+    Route::get("/notifications/{notificationId}", [NotificationController::class, "show"])->name("notifications.show")->where([
+        'notificationId' => $uuidRegex,
+    ]);
+    Route::delete("/notifications/{notificationId}", [NotificationController::class, "destroy"])->name("notifications.destroy")->where([
+        'notificationId' => $uuidRegex,
+    ]);
 
     // --- BIENS ---
     Route::put("/properties/{property}/restore", [AdminPropertyController::class, 'restore'])->name('properties.restore')->where([

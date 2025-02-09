@@ -225,3 +225,9 @@ Il faut activer les Queue sur le serveur pour utiliser la partie async
 ```
 php artisan make:listener ContactListener --event=ContactRequestEvent
 ```
+
+Créer une notification:
+
+```
+php artisan make:notification ContactRequestNotification
+```
