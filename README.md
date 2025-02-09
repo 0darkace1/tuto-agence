@@ -255,3 +255,35 @@ Mettre a jour les langues
 ```
 php artisan lang:update
 ```
+
+Créer la table de mise en file
+
+```
+php artisan queue:table
+```
+
+Executer les tache en file d'attente
+
+```
+php artisan queue:work
+```
+
+Executer les tache en file d'attente en mode verbeux
+
+```
+php artisan queue:work -v
+```
+
+Voir les tâches qui ont failed
+
+```
+php artisan queue:failed
+```
+
+Executer les tache qui ont failed
+
+```
+php artisan queue:retry
+```
+
+/!\ Mettre en place le supervisor en prod
