@@ -231,3 +231,27 @@ Créer une notification:
 ```
 php artisan make:notification ContactRequestNotification
 ```
+
+Publier les traductions de base
+
+```
+php artisan lang:publish
+```
+
+Installer le paquet de traduction
+
+```
+composer require laravel-lang/common --dev
+```
+
+Installer la langue FR
+
+```
+php artisan lang:add fr
+```
+
+Mettre a jour les langues
+
+```
+php artisan lang:update
+```

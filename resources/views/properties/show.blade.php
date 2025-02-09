@@ -66,7 +66,7 @@
                         class="col"></x-input>
                 </div>
                 <div class="row">
-                    <x-input name="phone" label="Téléphone" type="number" value="0612345678" :disabled="$property->sold"
+                    <x-input name="phone" label="Téléphone" type="text" value="0612345678" :disabled="$property->sold"
                         class="col"></x-input>
                     <x-input name="email" label="Email" type="email" value="email@example.com" :disabled="$property->sold"
                         class="col"></x-input>
